@@ -2,10 +2,10 @@
 // @name         nicovideo ranking custom script
 // @namespace    http://tampermonkey.net/
 // @homepage     https://marco.plus
-// @version      0.1.2
+// @version      0.1.3
 // @description  delete useless column xd
 // @author       Marco
-// @match        https://www.nicovideo.jp/ranking
+// @match        https://www.nicovideo.jp/ranking*
 // @grant        none
 // ==/UserScript==
 
