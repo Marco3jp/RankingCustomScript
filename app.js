@@ -2,7 +2,7 @@
 // @name         nicovideo ranking custom script
 // @namespace    http://tampermonkey.net/
 // @homepage     https://marco.plus
-// @version      0.1.0
+// @version      0.1.1
 // @description  delete useless column xd
 // @author       Marco
 // @match        https://www.nicovideo.jp/ranking
@@ -12,6 +12,7 @@
 (function () {
     'use strict';
     const deleteColumnNumbers = [6];
+    let fixedChunkCounter = 0;
     init();
 
     function init() {
@@ -28,7 +29,7 @@
         observer.observe(watchElm, config);
     }
 
-    function searchNodes() {
+    function searchNodes(_, observer) {
         let deleteElmList = [];
         let rows = document.querySelectorAll(".RankingMatrixVideosRow");
         for (let i = 0; i < rows.length; i++) {
@@ -40,12 +41,16 @@
             }
         }
         deleteNodes(deleteElmList);
+        if (fixedChunkCounter >= 100 * deleteColumnNumbers.length) {
+            observer.disconnect();
+        }
     }
 
     function deleteNodes(nodes) {
         for (let i = 0; i < nodes.length; i++) {
             if (nodes[i] !== null) {
                 nodes[i].parentNode.removeChild(nodes[i]);
+                fixedChunkCounter++;
             }
         }
     }
