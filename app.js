@@ -2,7 +2,7 @@
 // @name         nicovideo ranking custom script
 // @namespace    http://tampermonkey.net/
 // @homepage     https://marco.plus
-// @version      0.1.1
+// @version      0.1.2
 // @description  delete useless column xd
 // @author       Marco
 // @match        https://www.nicovideo.jp/ranking
@@ -41,7 +41,7 @@
             }
         }
         deleteNodes(deleteElmList);
-        if (fixedChunkCounter >= 100 * deleteColumnNumbers.length) {
+        if (fixedChunkCounter >= 100 * deleteColumnNumbers.length + deleteColumnNumbers.length) { // rows + header * deleteColumnNumber
             observer.disconnect();
         }
     }
